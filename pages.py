@@ -19,7 +19,6 @@ class UrbanRoutesPage:
     number_text_locator = (By.CSS_SELECTOR, '.np-button')
     number_enter = (By.ID, 'phone')
     number_confirm = (By.CSS_SELECTOR, '.button.full')
-    # XPath inteligente para não confundir o código SMS com o código CVV do cartão
     number_code = (By.XPATH, "//input[@id='code' and not(contains(@class, 'card-input'))]")
     code_confirm = (By.XPATH, '//button[contains(text(),"Confirmar")]')
     number_finish = (By.CSS_SELECTOR, '.np-text')
@@ -108,7 +107,6 @@ class UrbanRoutesPage:
         cvv_field = self.wait.until(EC.visibility_of_element_located(self.code_card))
         cvv_field.send_keys(code)
         
-        # DICA DO ENUNCIADO: Simular TAB para tirar o foco do CVV e habilitar o botão Adicionar
         cvv_field.send_keys(Keys.TAB)
         time.sleep(0.5) # Pequena pausa para o DOM processar a perda de foco
         
@@ -137,7 +135,6 @@ class UrbanRoutesPage:
         return switch_input.is_selected()
 
     def order_two_ice_creams(self):
-        # DICA DO ENUNCIADO: O ciclo foi movido para cá (pages.py)
         for _ in range(2):
             self.wait.until(EC.element_to_be_clickable(self.add_icecream)).click()
             time.sleep(0.5)
